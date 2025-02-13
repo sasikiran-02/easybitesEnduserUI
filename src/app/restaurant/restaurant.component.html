@@ -1,0 +1,32 @@
+<div class="min-h-screen bg-gray-900 p-6">
+  <h1 class="text-3xl font-bold text-white">
+    {{ searchQuery ? "Search Results" : "All Restaurants" }}
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+    <div
+      *ngFor="let restaurant of filteredRestaurants"
+      class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md backdrop-blur-md"
+    >
+      <img
+        [attr.src]="
+          'https://ewscripps.brightspotcdn.com/dims4/default/7ff0643/2147483647/strip/true/crop/2537x1427+5+0/resize/1280x720!/quality/90/?url=https%3A%2F%2Fwww.dontwasteyourmoney.com%2Fwp-content%2Fuploads%2F2023%2F08%2FAdobeStock_41843942-scaled-e1692119620858.jpeg'
+        "
+        alt="Restaurant Image"
+        class="w-full h-40 object-cover rounded-md"
+      />
+
+      <h3 class="text-xl font-semibold text-white mt-2">
+        {{ restaurant.name }}
+      </h3>
+      <p class="text-gray-300">{{ restaurant.address }}</p>
+      <p class="text-gray-400 mt-2">📍 {{ restaurant.city.name }}</p>
+      <a
+        [routerLink]="['/restaurant', restaurant.id, 'dishes']"
+        class="block mt-3 bg-orange-500 text-white text-center px-4 py-2 rounded-lg"
+      >
+        🍽 View Menu
+      </a>
+    </div>
+  </div>
+</div>

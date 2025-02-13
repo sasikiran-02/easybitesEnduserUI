@@ -1,0 +1,75 @@
+<div class="min-h-screen bg-gray-900 bg-opacity-90 p-6">
+  <!-- 🔹 Top Navigation -->
+  <div
+    class="flex justify-between items-center bg-orange-500 text-white p-6 rounded-lg shadow-md"
+  >
+    <h1 class="text-3xl font-bold">Your Cart</h1>
+  </div>
+
+  <!-- 🔹 Cart Items List -->
+  <div class="mt-8">
+    <h2 class="text-2xl font-bold text-white">Cart Items</h2>
+
+    <div
+      *ngIf="cartItems.length === 0"
+      class="text-center text-gray-400 text-lg mt-6"
+    >
+      Your cart is empty.
+    </div>
+
+    <div
+      *ngFor="let item of cartItems"
+      class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md backdrop-blur-md flex items-center justify-between mt-4"
+    >
+      <div class="flex items-center space-x-4">
+        <img
+          [src]="item.dish.imageUrl"
+          alt="Dish Image"
+          class="w-20 h-20 object-cover rounded-md"
+        />
+        <div>
+          <h3 class="text-xl font-semibold text-white">{{ item.dish.name }}</h3>
+          <p class="text-gray-300">
+            ${{ item.dish.price }} x {{ item.quantity }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button
+          (click)="decreaseQuantity(item)"
+          class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
+        >
+          -
+        </button>
+        <span class="text-white text-lg">{{ item.quantity }}</span>
+        <button
+          (click)="increaseQuantity(item)"
+          class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600"
+        >
+          +
+        </button>
+      </div>
+
+      <button
+        (click)="removeItem(item)"
+        class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+
+  <!-- 🔹 Total Price & Checkout -->
+  <div class="mt-8 text-white text-xl font-semibold">
+    Total Price: ${{ totalPrice.toFixed(2) }}
+  </div>
+
+  <button
+    (click)="checkout()"
+    class="w-full mt-6 bg-green-500 text-white p-3 rounded-lg text-lg font-bold hover:bg-green-600"
+    [disabled]="cartItems.length === 0"
+  >
+    Proceed to Checkout
+  </button>
+</div>
